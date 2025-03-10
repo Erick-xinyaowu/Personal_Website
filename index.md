@@ -5,7 +5,10 @@ layout: home
 hero:
   name: "ErickWu's Website"
   text: "A Personal Website"
-  tagline: My great project tagline
+  tagline: Endless Learning, Knowledge in Action.
+  image:
+      src: /tech.png
+      alt: 背景图
   actions:
     - theme: brand
       text: Markdown Examples
@@ -16,10 +19,10 @@ hero:
 
 features:
   - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details: This website is dedicated to sharing knowledge and fostering learning. We provide high-quality content across various academic and practical fields to help you expand your horizons and enhance your skills. 
   - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details:  Here, you'll find in-depth analyses, practical guides, and a community of like-minded learners.
   - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    details:  Whether you're exploring new ideas or deepening your expertise, we're here to support your journey.
 ---
 

@@ -2,10 +2,15 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  head: [["link", { rel: "icon", href: "/tech.png" }]],
   base: '/Personal_Website/',
   title: "ErickWu's Website",
   description: "A Personal Website",
   themeConfig: {
+    outlineTitle: '目录',
+    outline: [2,6],
+    // https://vitepress.dev/config/head
+      logo: '/tech.png',
        // 设置搜索框的样式
        search: {
         provider: "local",
@@ -43,10 +48,10 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/Erick-xinyaowu' }
     ],
     footer: {
-      copyright: '© 2023 ErickWu',
+      copyright: 'Copyright © 2023 ErickWu',
     }
   }
 })
