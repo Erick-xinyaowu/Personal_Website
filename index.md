@@ -18,11 +18,11 @@ hero:
       link: /api-examples
 
 features:
-  - title: Feature A
+  - title: Introduction A
     details: This website is dedicated to sharing knowledge and fostering learning. We provide high-quality content across various academic and practical fields to help you expand your horizons and enhance your skills. 
-  - title: Feature B
+  - title: Introduction B
     details:  Here, you'll find in-depth analyses, practical guides, and a community of like-minded learners.
-  - title: Feature C
+  - title: Introduction C
     details:  Whether you're exploring new ideas or deepening your expertise, we're here to support your journey.
 ---
 

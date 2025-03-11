@@ -7,7 +7,7 @@ export default defineConfig({
   title: "ErickWu's Website",
   description: "A Personal Website",
   themeConfig: {
-    outlineTitle: '目录',
+    outlineTitle: 'Outline',
     outline: [2,6],
     // https://vitepress.dev/config/head
       logo: '/tech.png',
