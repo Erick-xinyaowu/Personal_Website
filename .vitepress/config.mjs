@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  head: [["link", { rel: "icon", href: "/tech.png" }]],
+  head: [["link", { rel: "icon", href: "/Personal_Website/tech.png" }]],
   base: '/Personal_Website/',
   title: "ErickWu's Website",
   description: "A Personal Website",
