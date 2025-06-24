@@ -115,7 +115,8 @@ description: 理论类课程页面结构模板
 
 [这里放置课程内容的思维导图，帮助理解课程知识体系]
 
-![思维导图](/courses/resources/[课程目录]/mindmap.png)
+<!-- 图片位置: ![思维导图](/courses/resources/[课程目录]/mindmap.png) -->
+[此处放置思维导图]
 
 ## 常见问题解答
 

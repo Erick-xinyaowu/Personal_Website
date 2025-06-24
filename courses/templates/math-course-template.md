@@ -154,23 +154,27 @@ description: 数学类课程页面结构模板
 ### 函数图像
 
 - **[函数1]**
-  ![函数1图像](/courses/resources/[课程目录]/images/function1.png)
+  <!-- 图片位置: ![函数1图像](/courses/resources/[课程目录]/images/function1.png) -->
+  [此处放置函数1图像]
   - 特点：[函数特点]
   - 关键点：[关键点]
 
 - **[函数2]**
-  ![函数2图像](/courses/resources/[课程目录]/images/function2.png)
+  <!-- 图片位置: ![函数2图像](/courses/resources/[课程目录]/images/function2.png) -->
+  [此处放置函数2图像]
   - 特点：[函数特点]
   - 关键点：[关键点]
 
 ### 几何直观
 
 - **[几何概念1]**
-  ![几何概念1图像](/courses/resources/[课程目录]/images/geometry1.png)
+  <!-- 图片位置: ![几何概念1图像](/courses/resources/[课程目录]/images/geometry1.png) -->
+  [此处放置几何概念1图像]
   - 说明：[图像说明]
 
 - **[几何概念2]**
-  ![几何概念2图像](/courses/resources/[课程目录]/images/geometry2.png)
+  <!-- 图片位置: ![几何概念2图像](/courses/resources/[课程目录]/images/geometry2.png) -->
+  [此处放置几何概念2图像]
   - 说明：[图像说明]
 
 ## 学习方法与建议

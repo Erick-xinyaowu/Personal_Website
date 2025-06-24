@@ -23,21 +23,21 @@ jobs:
           fetch-depth: 0
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
-        with:
-          version: 10.6.2
+        with:          version: 10.6.2
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 22
+          node-version: 20
           cache: pnpm
       - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Install dependencies
-        run: pnpm install
-      - name: Build with VitePress
+        uses: actions/configure-pages@v3      - name: Install dependencies
+        run: pnpm install      - name: Build with VitePress
         run: |
+          # 创建一个临时占位文件将模板中的内容转换为不影响构建的格式
+          find ./courses/templates -name "*.md" -exec sed -i 's/\!\[.*\](\/courses\/resources\/.*)/[图片占位符]/g' {} \;
+          find ./courses/templates -name "*.md" -exec sed -i 's/\[.*\](\/courses\/resources\/.*)/[资源链接占位符]/g' {} \;
           pnpm run docs:build
-          touch .nojekyll
+          touch .vitepress/dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
