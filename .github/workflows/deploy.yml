@@ -20,23 +20,48 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-      - name: Setup pnpm
+          fetch-depth: 0      - name: Setup pnpm
         uses: pnpm/action-setup@v2
-        with:          version: 10.6.2
+        with:
+          version: 10.6.2
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: pnpm
-      - name: Setup Pages
+          cache: pnpm      - name: Setup Pages
         uses: actions/configure-pages@v3      - name: Install dependencies
         run: pnpm install      - name: Build with VitePress
         run: |
-          # 创建一个临时占位文件将模板中的内容转换为不影响构建的格式
-          find ./courses/templates -name "*.md" -exec sed -i 's/\!\[.*\](\/courses\/resources\/.*)/[图片占位符]/g' {} \;
-          find ./courses/templates -name "*.md" -exec sed -i 's/\[.*\](\/courses\/resources\/.*)/[资源链接占位符]/g' {} \;
+          # 创建脚本目录
+          mkdir -p scripts
+          
+          # 创建路径修复脚本
+          cat > scripts/fix-paths.sh << 'EOF'
+#!/bin/bash
+# 处理图片链接
+find ./courses -type f -name "*.md" | xargs grep -l "!\[.*\](/courses/resources/" | while read file; do
+  sed -i 's/\!\[.*\](\/courses\/resources\/[^)]*)/[图片占位符]/g' "$file"
+done
+# 处理资源链接
+find ./courses -type f -name "*.md" | xargs grep -l "\[.*\](/courses/resources/" | while read file; do
+  sed -i 's/\[.*\](\/courses\/resources\/[^)]*)/[资源链接占位符]/g' "$file"
+done
+echo "文件路径处理完成"
+EOF
+
+          # 给脚本执行权限
+          chmod +x scripts/fix-paths.sh
+          
+          # 执行路径修复脚本
+          ./scripts/fix-paths.sh
+          
+          # 创建必要的目录结构
+          mkdir -p .vitepress/dist/courses/resources
+          
+          # 执行构建
           pnpm run docs:build
+          
+          # 添加 .nojekyll 文件
           touch .vitepress/dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
