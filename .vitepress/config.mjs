@@ -34,7 +34,8 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Examples', link: '/markdown-examples' },
+      { text: '课程资料', link: '/courses/' }
     ],
 
     sidebar: [
@@ -43,6 +44,53 @@ export default defineConfig({
         items: [
           { text: 'Markdown Examples', link: '/markdown-examples' },
           { text: 'Runtime API Examples', link: '/api-examples' }
+        ]
+      },
+      {
+        text: '课程资料',
+        items: [
+          { text: '课程概览', link: '/courses/' },
+          { text: '页面模板', link: '/courses/templates/' },
+          { 
+            text: '计算机科学', 
+            link: '/courses/computer-science/',
+            collapsed: true,
+            items: [
+              { text: '数据结构与算法', link: '/courses/computer-science/data-structures' },
+              { text: '计算机组成原理', link: '/courses/computer-science/computer-organization' },
+              { text: '操作系统', link: '/courses/computer-science/operating-systems' },
+              { text: '计算机网络', link: '/courses/computer-science/computer-networks' }
+            ]
+          },
+          { 
+            text: '数学', 
+            link: '/courses/mathematics/',
+            collapsed: true,
+            items: [
+              { text: '高等数学', link: '/courses/mathematics/calculus' },
+              { text: '线性代数', link: '/courses/mathematics/linear-algebra' },
+              { text: '概率论与数理统计', link: '/courses/mathematics/probability-statistics' }
+            ]
+          },
+          { 
+            text: '电子工程', 
+            link: '/courses/electronics/',
+            collapsed: true,
+            items: [
+              { text: '电路分析基础', link: '/courses/electronics/circuit-analysis' },
+              { text: '数字电子技术', link: '/courses/electronics/digital-electronics' },
+              { text: '模拟电子技术', link: '/courses/electronics/analog-electronics' }
+            ]
+          },
+          { 
+            text: '物理学', 
+            link: '/courses/physics/',
+            collapsed: true,
+            items: [
+              { text: '大学物理(上)', link: '/courses/physics/physics-mechanics' },
+              { text: '大学物理(下)', link: '/courses/physics/physics-electromagnetism' }
+            ]
+          }
         ]
       }
     ],
