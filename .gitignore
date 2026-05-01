@@ -6,3 +6,5 @@ cache
 .cache
 .temp
 *.local
+/public/courses/resource
+/public/courses/课程信息.txt

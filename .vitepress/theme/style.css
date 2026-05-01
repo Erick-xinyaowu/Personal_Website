@@ -1,58 +1,55 @@
 /**
- * Customize default theme styling by overriding CSS variables:
- * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+ * ErickWu Personal Website — Custom Design System
+ * Inspired by: ReactBits, rauno.me, kentatoshikura.com
+ * 
+ * Design direction: Minimal, editorial, dark-first with subtle warmth.
+ * - Clean typography with generous whitespace
+ * - Soft border glow effects on interactive elements
+ * - Smooth micro-animations and transitions
+ * - Deep dark mode with luminous accents
  */
 
-/**
- * Colors
- *
- * Each colors have exact same color scale system with 3 levels of solid
- * colors with different brightness, and 1 soft color.
- *
- * - `XXX-1`: The most solid color used mainly for colored text. It must
- *   satisfy the contrast ratio against when used on top of `XXX-soft`.
- *
- * - `XXX-2`: The color used mainly for hover state of the button.
- *
- * - `XXX-3`: The color for solid background, such as bg color of the button.
- *   It must satisfy the contrast ratio with pure white (#ffffff) text on
- *   top of it.
- *
- * - `XXX-soft`: The color used for subtle background such as custom container
- *   or badges. It must satisfy the contrast ratio when putting `XXX-1` colors
- *   on top of it.
- *
- *   The soft color must be semi transparent alpha channel. This is crucial
- *   because it allows adding multiple "soft" colors on top of each other
- *   to create a accent, such as when having inline code block inside
- *   custom containers.
- *
- * - `default`: The color used purely for subtle indication without any
- *   special meanings attached to it such as bg color for menu hover state.
- *
- * - `brand`: Used for primary brand colors, such as link text, button with
- *   brand theme, etc.
- *
- * - `tip`: Used to indicate useful information. The default theme uses the
- *   brand color for this by default.
- *
- * - `warning`: Used to indicate warning to the users. Used in custom
- *   container, badges, etc.
- *
- * - `danger`: Used to show error, or dangerous message to the users. Used
- *   in custom container, badges, etc.
- * -------------------------------------------------------------------------- */
+/* ========================================================================== */
+/*  1. CSS Custom Properties (Design Tokens)                                  */
+/* ========================================================================== */
 
 :root {
+  /* Brand Colors */
+  --ew-brand-primary: #6366f1;
+  --ew-brand-secondary: #8b5cf6;
+  --ew-brand-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+  --ew-brand-glow: rgba(99, 102, 241, 0.15);
+
+  /* Accent */
+  --ew-accent-cyan: #22d3ee;
+  --ew-accent-emerald: #34d399;
+
+  /* Typography */
+  --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+
+  /* Transitions */
+  --ew-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ew-transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ew-transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Radius */
+  --ew-radius-sm: 8px;
+  --ew-radius-md: 12px;
+  --ew-radius-lg: 16px;
+  --ew-radius-xl: 24px;
+
+  /* VitePress Brand Overrides */
+  --vp-c-brand-1: #6366f1;
+  --vp-c-brand-2: #818cf8;
+  --vp-c-brand-3: #4f46e5;
+  --vp-c-brand-soft: rgba(99, 102, 241, 0.12);
+
+  /* Default color palette */
   --vp-c-default-1: var(--vp-c-gray-1);
   --vp-c-default-2: var(--vp-c-gray-2);
   --vp-c-default-3: var(--vp-c-gray-3);
   --vp-c-default-soft: var(--vp-c-gray-soft);
-
-  --vp-c-brand-1: var(--vp-c-indigo-1);
-  --vp-c-brand-2: var(--vp-c-indigo-2);
-  --vp-c-brand-3: var(--vp-c-indigo-3);
-  --vp-c-brand-soft: var(--vp-c-indigo-soft);
 
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
@@ -70,9 +67,63 @@
   --vp-c-danger-soft: var(--vp-c-red-soft);
 }
 
-/**
- * Component: Button
- * -------------------------------------------------------------------------- */
+/* Dark Mode Enhancements */
+.dark {
+  --vp-c-brand-1: #818cf8;
+  --vp-c-brand-2: #a5b4fc;
+  --vp-c-brand-3: #6366f1;
+  --vp-c-brand-soft: rgba(129, 140, 248, 0.12);
+  --ew-brand-glow: rgba(129, 140, 248, 0.08);
+}
+
+/* ========================================================================== */
+/*  2. Global Styles                                                          */
+/* ========================================================================== */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(99, 102, 241, 0.25);
+  color: inherit;
+}
+
+/* ========================================================================== */
+/*  3. Navigation                                                             */
+/* ========================================================================== */
+
+/* Frosted glass navbar */
+.VPNav {
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+.dark .VPNav {
+  background-color: rgba(10, 10, 10, 0.8) !important;
+}
+
+/* Nav link hover animation */
+.VPNavBarMenuLink .VPLink {
+  transition: color var(--ew-transition-fast), opacity var(--ew-transition-fast);
+}
+
+.VPNavBarMenuLink .VPLink:hover {
+  opacity: 0.8;
+}
+
+/* ========================================================================== */
+/*  4. Buttons                                                                */
+/* ========================================================================== */
 
 :root {
   --vp-button-brand-border: transparent;
@@ -86,41 +137,283 @@
   --vp-button-brand-active-bg: var(--vp-c-brand-1);
 }
 
-/**
- * Component: Home
- * -------------------------------------------------------------------------- */
+.VPButton {
+  border-radius: var(--ew-radius-sm) !important;
+  transition: all var(--ew-transition-base) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em;
+}
+
+.VPButton.medium {
+  padding: 0 24px !important;
+  line-height: 44px !important;
+}
+
+.VPButton.brand:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+}
+
+.VPButton.alt:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.dark .VPButton.alt:hover {
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================================================== */
+/*  5. Home Page — Hero                                                       */
+/* ========================================================================== */
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    #bd34fe 30%,
-    #41d1ff
-  );
-
+  --vp-home-hero-name-background: var(--ew-brand-gradient);
   --vp-home-hero-image-background-image: linear-gradient(
     -45deg,
-    #bd34fe 50%,
-    #47caff 50%
+    rgba(99, 102, 241, 0.4) 30%,
+    rgba(139, 92, 246, 0.4) 70%
   );
-  --vp-home-hero-image-filter: blur(44px);
+  --vp-home-hero-image-filter: blur(56px);
 }
 
 @media (min-width: 640px) {
-  :root {
-    --vp-home-hero-image-filter: blur(56px);
-  }
-}
-
-@media (min-width: 960px) {
   :root {
     --vp-home-hero-image-filter: blur(68px);
   }
 }
 
-/**
- * Component: Custom Block
- * -------------------------------------------------------------------------- */
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(80px);
+  }
+}
+
+/* Hero name animation */
+.VPHero .name {
+  animation: heroFadeIn 0.8s ease-out;
+}
+
+.VPHero .text {
+  animation: heroFadeIn 0.8s ease-out 0.1s both;
+}
+
+.VPHero .tagline {
+  animation: heroFadeIn 0.8s ease-out 0.2s both;
+}
+
+.VPHero .actions {
+  animation: heroFadeIn 0.8s ease-out 0.3s both;
+}
+
+.VPHero .image-container {
+  animation: heroFadeIn 0.8s ease-out 0.15s both;
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero image styling */
+.VPHero .VPImage {
+  border-radius: var(--ew-radius-lg) !important;
+  transition: transform var(--ew-transition-slow);
+}
+
+.VPHero .VPImage:hover {
+  transform: scale(1.02);
+}
+
+/* ========================================================================== */
+/*  6. Home Page — Features                                                   */
+/* ========================================================================== */
+
+.VPFeature {
+  border-radius: var(--ew-radius-md) !important;
+  border: 1px solid var(--vp-c-divider) !important;
+  transition: all var(--ew-transition-base) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.VPFeature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--ew-brand-gradient);
+  opacity: 0;
+  transition: opacity var(--ew-transition-base);
+}
+
+.VPFeature:hover {
+  border-color: var(--vp-c-brand-1) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.08);
+}
+
+.dark .VPFeature:hover {
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.06);
+}
+
+.VPFeature:hover::before {
+  opacity: 1;
+}
+
+/* Feature icon */
+.VPFeature .icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Feature link */
+.VPFeature .link-text {
+  color: var(--vp-c-brand-1);
+  font-weight: 500;
+  transition: color var(--ew-transition-fast);
+}
+
+/* Features entrance animation */
+.VPFeatures .VPFeature {
+  animation: featureSlideUp 0.6s ease-out both;
+}
+
+.VPFeatures .VPFeature:nth-child(1) { animation-delay: 0.1s; }
+.VPFeatures .VPFeature:nth-child(2) { animation-delay: 0.2s; }
+.VPFeatures .VPFeature:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes featureSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================================================== */
+/*  7. Content Pages (Doc Layout)                                             */
+/* ========================================================================== */
+
+/* Headings */
+.vp-doc h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: var(--ew-brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.vp-doc h2 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+/* Links */
+.vp-doc a {
+  transition: color var(--ew-transition-fast), text-decoration-color var(--ew-transition-fast);
+  text-decoration-color: transparent;
+}
+
+.vp-doc a:hover {
+  text-decoration-color: var(--vp-c-brand-1);
+}
+
+/* Inline code */
+.vp-doc :not(pre) > code {
+  border-radius: var(--ew-radius-sm);
+  padding: 2px 6px;
+  font-size: 0.875em;
+  font-weight: 500;
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  transition: background-color var(--ew-transition-fast);
+}
+
+/* Code blocks */
+.vp-doc div[class*='language-'] {
+  border-radius: var(--ew-radius-md);
+  border: 1px solid var(--vp-c-divider);
+  transition: border-color var(--ew-transition-base);
+}
+
+.vp-doc div[class*='language-']:hover {
+  border-color: var(--vp-c-brand-soft);
+}
+
+/* Blockquotes */
+.vp-doc blockquote {
+  border-left: 3px solid var(--vp-c-brand-1);
+  background-color: var(--vp-c-brand-soft);
+  border-radius: 0 var(--ew-radius-sm) var(--ew-radius-sm) 0;
+  padding: 1rem 1.25rem;
+  color: var(--vp-c-text-2);
+}
+
+/* HR */
+.vp-doc hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--vp-c-divider) 20%,
+    var(--vp-c-divider) 80%,
+    transparent
+  );
+  margin: 2.5rem 0;
+}
+
+/* ========================================================================== */
+/*  8. Sidebar                                                                */
+/* ========================================================================== */
+
+.VPSidebar .VPSidebarItem .item .link {
+  border-radius: var(--ew-radius-sm);
+  transition: all var(--ew-transition-fast);
+}
+
+.VPSidebar .VPSidebarItem .item .link:hover {
+  background-color: var(--vp-c-brand-soft);
+}
+
+.VPSidebar .VPSidebarItem.is-active > .item > .link {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+/* ========================================================================== */
+/*  9. Footer                                                                 */
+/* ========================================================================== */
+
+.VPFooter {
+  border-top: 1px solid var(--vp-c-divider) !important;
+}
+
+.VPFooter .message,
+.VPFooter .copyright {
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
+}
+
+/* ========================================================================== */
+/*  10. Custom Block (Tips, Warning, etc.)                                    */
+/* ========================================================================== */
 
 :root {
   --vp-custom-block-tip-border: transparent;
@@ -129,11 +422,146 @@
   --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
 }
 
-/**
- * Component: Algolia
- * -------------------------------------------------------------------------- */
+.custom-block {
+  border-radius: var(--ew-radius-md);
+  transition: border-color var(--ew-transition-base);
+}
+
+/* ========================================================================== */
+/*  11. Search                                                                */
+/* ========================================================================== */
 
 .DocSearch {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+/* ========================================================================== */
+/*  12. Scrollbar                                                             */
+/* ========================================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--vp-c-divider);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--vp-c-text-3);
+}
+
+/* ========================================================================== */
+/*  13. Responsive Adjustments                                                */
+/* ========================================================================== */
+
+/* Mobile (375px) */
+@media (max-width: 639px) {
+  .VPHero .name {
+    font-size: 2rem !important;
+  }
+  .VPHero .text {
+    font-size: 1.25rem !important;
+  }
+  .VPHero .tagline {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* Tablet (768px) */
+@media (min-width: 640px) and (max-width: 959px) {
+  .VPHero .name {
+    font-size: 2.5rem !important;
+  }
+}
+
+/* ========================================================================== */
+/*  14. Page Transition Animation                                             */
+/* ========================================================================== */
+
+.VPContent {
+  animation: pageEnter 0.4s ease-out;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================================================== */
+/*  15. Custom Components Styles (used in Markdown pages)                     */
+/* ========================================================================== */
+
+/* About page avatar */
+.about-hero {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.about-avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--vp-c-brand-1);
+  box-shadow: 0 8px 32px var(--ew-brand-glow);
+  transition: transform var(--ew-transition-base), box-shadow var(--ew-transition-base);
+}
+
+.about-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 48px rgba(99, 102, 241, 0.25);
+}
+
+/* Contact cards */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.contact-card {
+  padding: 1.5rem;
+  border-radius: var(--ew-radius-md);
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  transition: all var(--ew-transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--ew-brand-gradient);
+  opacity: 0;
+  transition: opacity var(--ew-transition-base);
+}
+
+.contact-card:hover {
+  border-color: var(--vp-c-brand-1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--ew-brand-glow);
+}
+
+.contact-card:hover::before {
+  opacity: 1;
+}
