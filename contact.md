@@ -8,13 +8,13 @@ description: 联系 ErickWu — 邮箱、GitHub、ORCID
 
 如果你对我的项目感兴趣、希望学术合作，或者只是想打个招呼，欢迎通过以下方式联系我。
 
-## 📬 联系渠道
+## 联系渠道
 
 <div class="contact-grid">
 
 <div class="contact-card">
 
-### 📧 邮箱
+### 邮箱
 [wuerick2023@gmail.com](mailto:wuerick2023@gmail.com)
 
 最佳联系方式，通常会在 24 小时内回复。
@@ -23,7 +23,7 @@ description: 联系 ErickWu — 邮箱、GitHub、ORCID
 
 <div class="contact-card">
 
-### 🐙 GitHub
+### GitHub
 [Erick-xinyaowu](https://github.com/Erick-xinyaowu)
 
 查看我的项目代码，欢迎 Star 和 Issue。
@@ -32,7 +32,7 @@ description: 联系 ErickWu — 邮箱、GitHub、ORCID
 
 <div class="contact-card">
 
-### 🆔 ORCID
+### ORCID
 [0009-0004-1609-538X](https://orcid.org/0009-0004-1609-538X)
 
 学术身份标识。

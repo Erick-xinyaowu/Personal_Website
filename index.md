@@ -19,18 +19,15 @@ hero:
       link: /about
 
 features:
-  - icon: 💼
-    title: 项目作品
+  - title: 项目作品
     details: 涵盖数据可视化、信息系统分析、文献计量等领域的多个实践项目。
     link: /projects
     linkText: 查看全部 →
-  - icon: 📚
-    title: 课程资料
+  - title: 课程资料
     details: 武汉大学信管 × 计科双学位课程笔记与资料，持续整理更新中。
     link: /courses/
     linkText: 浏览课程 →
-  - icon: ✍️
-    title: 博客笔记
+  - title: 博客笔记
     details: 技术学习、项目复盘、跨学科思考，记录成长的每一步。
     link: /blog/
     linkText: 阅读博客 →

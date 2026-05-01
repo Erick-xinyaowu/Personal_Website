@@ -5,7 +5,7 @@ export default defineConfig({
     ["link", { rel: "icon", href: "/Personal_Website/tech.png" }],
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
     ["link", { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }],
-    ["link", { href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap", rel: "stylesheet" }],
+    ["link", { href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap", rel: "stylesheet" }],
     ["meta", { name: "author", content: "ErickWu (Xinyao Wu)" }],
     ["meta", { name: "keywords", content: "ErickWu, Xinyao Wu, Wuhan University, 武汉大学, 信息管理, 计算机科学, 个人网站, portfolio" }],
   ],
@@ -76,6 +76,9 @@ export default defineConfig({
           text: '博客文章',
           items: [
             { text: '全部文章', link: '/blog/' },
+            { text: 'VitePress 个人网站重构实录', link: '/blog/vitepress-rebuild' },
+            { text: '一带一路可视化复盘', link: '/blog/br-visualization-review' },
+            { text: '信管 × 计科跨学科感悟', link: '/blog/interdisciplinary-learning' }
           ]
         }
       ]

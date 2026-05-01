@@ -25,7 +25,9 @@
   --ew-accent-emerald: #34d399;
 
   /* Typography */
-  --vp-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --ew-font-serif: 'Lora', 'Tiempos Text', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --ew-font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  --vp-font-family-base: var(--ew-font-sans);
   --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace;
 
   /* Transitions */
@@ -192,6 +194,7 @@ body {
 
 /* Hero name animation */
 .VPHero .name {
+  font-family: var(--ew-font-serif);
   animation: heroFadeIn 0.8s ease-out;
 }
 
@@ -200,6 +203,8 @@ body {
 }
 
 .VPHero .tagline {
+  font-family: var(--ew-font-serif);
+  font-style: italic;
   animation: heroFadeIn 0.8s ease-out 0.2s both;
 }
 
@@ -223,13 +228,19 @@ body {
 }
 
 /* Hero image styling */
-.VPHero .VPImage {
-  border-radius: var(--ew-radius-lg) !important;
-  transition: transform var(--ew-transition-slow);
+.VPHero .image-container,
+.VPHero .image-bg {
+  transform: none !important;
 }
 
-.VPHero .VPImage:hover {
-  transform: scale(1.02);
+.VPHero .VPImage {
+  border-radius: var(--ew-radius-lg) !important;
+  transition: transform var(--ew-transition-slow) !important;
+  transform-origin: center;
+}
+
+.VPHero .image-container:hover .VPImage {
+  transform: scale(1.02) !important;
 }
 
 /* ========================================================================== */
@@ -307,8 +318,16 @@ body {
 /*  7. Content Pages (Doc Layout)                                             */
 /* ========================================================================== */
 
+/* Content Pages */
+.vp-doc {
+  font-family: var(--ew-font-serif);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
 /* Headings */
 .vp-doc h1 {
+  font-family: var(--ew-font-serif);
   font-weight: 700;
   letter-spacing: -0.02em;
   background: var(--ew-brand-gradient);
@@ -318,6 +337,7 @@ body {
 }
 
 .vp-doc h2 {
+  font-family: var(--ew-font-serif);
   font-weight: 600;
   letter-spacing: -0.01em;
   padding-bottom: 0.5rem;
@@ -336,6 +356,7 @@ body {
 
 /* Inline code */
 .vp-doc :not(pre) > code {
+  font-family: var(--vp-font-family-mono);
   border-radius: var(--ew-radius-sm);
   padding: 2px 6px;
   font-size: 0.875em;
