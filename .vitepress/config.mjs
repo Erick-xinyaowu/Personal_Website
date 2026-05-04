@@ -90,7 +90,7 @@ export default defineConfig({
 
     footer: {
       message: 'Wuhan University · Information × Technology',
-      copyright: 'Copyright © 2025 ErickWu',
+      copyright: 'Copyright © 2026 ErickWu',
     }
   }
 })

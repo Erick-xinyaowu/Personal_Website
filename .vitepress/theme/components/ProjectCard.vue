@@ -1,33 +1,10 @@
 <template>
-  <div class="project-card">
+  <article class="project-card" ref="cardRef" role="region">
     <div class="project-main">
-      <div class="project-header">
-        <h3 class="project-title">
-          <a :href="github || demo" target="_blank" class="title-link">{{ title }}</a>
-        </h3>
-        <span class="public-badge">Public</span>
-      </div>
-      <p class="project-desc">{{ desc }}</p>
-      
-      <div class="project-tags" v-if="tags && tags.length > 1">
-        <span v-for="tag in tags.slice(1)" :key="tag" class="project-tag">{{ tag }}</span>
-      </div>
-
-      <div class="project-meta">
-        <div class="meta-item language" v-if="tags && tags.length > 0">
-          <span class="lang-color" :style="{ backgroundColor: getLangColor(tags[0]) }"></span>
-          <span>{{ tags[0] }}</span>
-        </div>
-        <a v-if="demo" :href="demo" target="_blank" class="meta-item demo-link">
-          <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="octicon octicon-link">
-             <path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path>
-          </svg>
-          Live Demo
-        </a>
-        <div class="meta-item updated" v-if="updated">
-          Updated {{ updated }}
-        </div>
-      </div>
+      <ProjectCardHeader :title="title" :github="github" :demo="demo" />
+      <ProjectCardBody :desc="desc" />
+      <ProjectCardTags :tags="tags" />
+      <ProjectCardMetrics :tags="tags" :demo="demo" :updated="updated" />
     </div>
     
     <div class="project-actions" v-if="github">
@@ -40,10 +17,16 @@
         </a>
       </div>
     </div>
-  </div>
+  </article>
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue'
+import ProjectCardHeader from './ProjectCardHeader.vue'
+import ProjectCardBody from './ProjectCardBody.vue'
+import ProjectCardTags from './ProjectCardTags.vue'
+import ProjectCardMetrics from './ProjectCardMetrics.vue'
+
 defineProps({
   title: String,
   desc: String,
@@ -53,17 +36,21 @@ defineProps({
   updated: String
 })
 
-const getLangColor = (lang) => {
-  const colors = {
-    'Python': '#3572A5',
-    'Vue.js': '#41b883',
-    'JavaScript': '#f1e05a',
-    'Jupyter Notebook': '#DA5B0B',
-    'Java': '#b07219',
-    'HTML': '#e34c26'
-  }
-  return colors[lang] || '#8b5cf6'
-}
+const cardRef = ref(null)
+
+onMounted(() => {
+  // IntersectionObserver for Scroll Reveal Effect
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-enter')
+        observer.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' })
+
+  if (cardRef.value) observer.observe(cardRef.value)
+})
 </script>
 
 <style scoped>
@@ -72,8 +59,36 @@ const getLangColor = (lang) => {
   justify-content: space-between;
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--vp-c-divider);
-  transition: all var(--ew-transition-base);
+  transition: transform 400ms var(--ew-spring-bouncy), background-color 200ms var(--ew-spring-snappy);
   position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.project-card.reveal-enter {
+  animation: slideUpSpring 800ms var(--ew-spring-bouncy) forwards;
+}
+
+@keyframes slideUpSpring {
+  0% { opacity: 0; transform: translateY(30px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--ew-radius-md);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.dark .project-card::after {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .project-card:last-child {
@@ -88,11 +103,11 @@ const getLangColor = (lang) => {
   margin-left: -1.25rem;
   margin-right: -1.25rem;
   border-bottom-color: transparent;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transform: translateY(-4px);
 }
 
-.dark .project-card:hover {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+.project-card:hover::after {
+  opacity: 1;
 }
 
 /* Gradient line on left when hovered */
@@ -117,116 +132,6 @@ const getLangColor = (lang) => {
   flex: 1;
   min-width: 0;
   padding-right: 2rem;
-}
-
-.project-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
-}
-
-.project-title {
-  margin: 0 !important;
-  font-size: 1.25rem;
-  border: none !important;
-  padding: 0 !important;
-  font-family: var(--ew-font-sans);
-  font-weight: 600;
-}
-
-.title-link {
-  color: var(--vp-c-brand-1) !important;
-  text-decoration: none !important;
-}
-
-.title-link:hover {
-  text-decoration: underline !important;
-  text-decoration-color: var(--vp-c-brand-1) !important;
-  text-underline-offset: 4px;
-}
-
-.public-badge {
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 0 7px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 2rem;
-  color: var(--vp-c-text-2);
-  line-height: 18px;
-  font-family: var(--ew-font-sans);
-}
-
-.project-desc {
-  font-size: 0.9rem;
-  color: var(--vp-c-text-2);
-  margin-bottom: 1rem;
-  line-height: 1.5;
-  font-family: var(--ew-font-sans);
-}
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.project-tag {
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 2px 10px;
-  border-radius: 2rem;
-  color: var(--vp-c-brand-2);
-  background-color: var(--vp-c-brand-soft);
-  font-family: var(--ew-font-sans);
-  transition: all var(--ew-transition-fast);
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-
-.project-tag:hover {
-  background-color: var(--vp-c-brand-1);
-  color: var(--vp-c-white);
-  transform: translateY(-1px);
-}
-
-.project-meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-  font-size: 0.75rem;
-  color: var(--vp-c-text-2);
-  font-family: var(--ew-font-sans);
-}
-
-.meta-item {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.lang-color {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
-  border: 1px solid rgba(128, 128, 128, 0.2);
-}
-
-.octicon {
-  fill: currentColor;
-}
-
-.demo-link {
-  color: var(--vp-c-text-2);
-  text-decoration: none !important;
-  transition: color 0.2s;
-}
-
-.demo-link:hover {
-  color: var(--vp-c-brand-1);
 }
 
 .project-actions {
